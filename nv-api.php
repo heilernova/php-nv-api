@@ -23,7 +23,7 @@ class Api
         if ($cors) $this->cors->load();
 
         if (!empty($url)){
-
+        
             $route = Routes::find($url);
 
             if ($route){

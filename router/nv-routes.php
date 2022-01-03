@@ -51,7 +51,7 @@ class Routes
                         }else{
                             // Cuadno de encuentre una igualdad de detendra el ciclo
                             $route->httpRequest == $url;
-                            $valid = false;
+                            // $valid = false;
                         }
                     }
 
@@ -60,6 +60,7 @@ class Routes
                     return false;
                 }
             });
+            // response(self::$routes);
 
             return array_shift($filter_urls) ?? null;
         }

@@ -33,12 +33,19 @@ class Route{
         public string $nameSpaceController = '',
     )
     {
+
+        // Separamos la url un array con los valor ingresados.
         $this->urlArray = explode('/', $url);
+
+        // Almacenamos el número de elementos de un array crado apartir de la url designada para la ruta.
         $this->num = count($this->urlArray);
 
-        $this->indexParams = array_reduce($this->urlArray, function($carry, $item){ 
+        // Almacensomas los indeces de la parametros de la url.
+        $result = array_reduce($this->urlArray, function($carry, $item){ 
             
             static $i = 0;
+            $carry[0] = []; // parametrops
+            $carry[1] = []; // Controladores
             
             if (str_starts_with($item,  ':')) 
             {
@@ -54,6 +61,10 @@ class Route{
             return $carry;
         });
 
+        // echo json_encode($result); exit;
+
+        $this->indexParams = $result[0];
+        $this->indexControllers = $result[1];
     }
 
 
@@ -65,12 +76,14 @@ class Route{
      */
     public function getParams():?array
     {
-
+        // Separamos en un array la url inviado por el cliente
         $array = explode('/', $this->httpRequest);
 
+        // recorresmos el array del index de los params
         $params = array_reduce($this->indexParams, function($carry, $item) use ($array){
 
-            $type = ltrim($this->urlArray[$item], ':');
+            var_dump($this->urlArray); exit;
+            $type = ltrim($array[$item], ':');
 
             $carry[] = match ($type){
                 'int' => (int)$array[$item],

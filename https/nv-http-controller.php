@@ -17,6 +17,11 @@ class nvHttpController
     {
         // Obtenemos y almacenamos en la variable $body el contendio del boyd de la peticion http
         $this->body = json_decode(file_get_contents('php://input'));
+
+        // validamos is exitem el model
+        $controller = str_replace('Controller', 'Model', $this::class);
+        //response($controller);
+        $this->model =  new $controller();
     }
 
     /**
@@ -35,7 +40,7 @@ class nvHttpController
 
             $params_number = $ref->getNumberOfParameters();
             $params_number_required =$ref->getNumberOfRequiredParameters();
-            $num_params = count($params);
+            $num_params = $params ? count($params) : 0;
 
             if ($params_number == $num_params || $params_number_required == $num_params){
                 
