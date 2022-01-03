@@ -25,6 +25,8 @@ require_once 'database/functions/nv-db-sql-insert.php';
 require_once 'database/functions/nv-db-stmt-sql-insert.php';
 require_once 'database/functions/nv-db-stmt-sql-update.php';
 
+// Objetos
+require_once 'classes/nv-date.php';
 
 // Variables de entorno
 $_ENV['NV_CORS_ACCESS-CONTROL-ALLOW-ORIGIN'] = '*';
