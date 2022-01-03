@@ -86,8 +86,12 @@ class Database
                 }
 
                 if ($stmt->execute()){
-                    $this->affectedRows = 0;
-                    $this->insertId = 0;
+
+                    // Guardamos el número de filas afectadas de la cosulta sql
+                    $this->affectedRows = $stmt->affected_rows;
+
+                    // Guardamos el id generado de la consulta sql.
+                    $this->insertId = $stmt->insert_id;
 
                     $result = $stmt->get_result();
 
