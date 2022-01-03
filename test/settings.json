@@ -1,0 +1,13 @@
+{
+    "paths":{
+        "https": "https/",
+        "tables": "db/tables/",
+        "errors": "errors/"
+    },
+    "connectionData":{
+        "hostname":"localhost",
+        "username":"root",
+        "password":"",
+        "database":"test"
+    }
+}
