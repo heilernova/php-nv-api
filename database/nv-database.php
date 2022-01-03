@@ -5,6 +5,7 @@ use mysqli;
 use mysqli_result;
 
 use function nv\api\nv_api_error_log;
+use function nv\api\response;
 
 /**
  * En esta clase el auto commit esta desactivado.
@@ -15,7 +16,7 @@ class Database
 
     private array $connectionData = array();
 
-    private mysqli $connection;
+    private ?mysqli $connection = null;
 
     public array $errors = array();
 
@@ -41,7 +42,8 @@ class Database
         if (!$this->connection){
             extract($this->connectionData);
             $conection = @mysqli_connect($hostname, $username, $password, $database);
-
+            
+            // response($conection);
             if (!$conection){
                 $msg = [
                     "Error con la conexión de la base de datos.",
@@ -73,7 +75,6 @@ class Database
      */
     public function execute(string $sql, ?array $params = null):mysqli_result|bool
     {
-        $this->openConnection();
         try {
             $this->openConnection();
             $stmt = $this->connection->prepare($sql);
@@ -143,7 +144,7 @@ class Database
 
     private function getRefValues(array $params):array
     {
-        $ref = array();
+        $ref = array(''); // Creamos un array con un valor vacio
         
         foreach($params as $key=>$value){
             $ref[0] .= is_string($value) ? 's' : (is_int($value) ? 'i' : 'd');

@@ -49,11 +49,11 @@ class Api
         try {
 
             $settings = json_decode(file_get_contents($path));
-    
+
             define('NV_API_DB_HOSTNAME', $settings->connectionData->hostname ?? '');
-            define('NV_API_DB_USERNAME', $settings->connectionData->hostname ?? '');
-            define('NV_API_DB_PASSWORD', $settings->connectionData->hostname ?? '');
-            define('NV_API_DB_DATABASE', $settings->connectionData->hostname ?? '');
+            define('NV_API_DB_USERNAME', $settings->connectionData->username ?? '');
+            define('NV_API_DB_PASSWORD', $settings->connectionData->password ?? '');
+            define('NV_API_DB_DATABASE', $settings->connectionData->database ?? '');
     
             define('NV_API_PATH_HTTPS', $settings->paths->https ?? 'https/');
             define('NV_API_PATH_TABLES', $settings->paths->tables ?? 'db/');
