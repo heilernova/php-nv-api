@@ -1,6 +1,8 @@
 <?php
 namespace nv;
 
+use function nv\api\response;
+
 /**
  * Carga los datos de un array asociativo o un object a un clase definida.
  * @return null|array Si retorna un array es porque ocurreo un error al cargar los datos.
@@ -10,6 +12,14 @@ namespace nv;
 function nv_load_data_class(object $object, object|array $data):?array
 {
     $data = (array)$data;
+
+    $keys = [];
+
+    foreach($object as $key=>$value){
+        $keys[] = $key;
+    }
+
+    response($keys);
 
     $keys_object = array_keys((array)$object);
     
@@ -35,6 +45,7 @@ function nv_load_data_class(object $object, object|array $data):?array
             $keys_undefined[] = $key;
 
         }
+        response($keys_object);
         return ($keys_undefined ||$keys_invalid ) ? [$keys_undefined,$keys_invalid] : null;
     }
 }

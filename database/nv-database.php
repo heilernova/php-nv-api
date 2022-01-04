@@ -5,7 +5,8 @@ use mysqli;
 use mysqli_result;
 
 use function nv\api\nv_api_error_log;
-use function nv\api\response;
+
+require_once 'nv-database-query.php';
 
 /**
  * En esta clase el auto commit esta desactivado.
@@ -23,6 +24,10 @@ class Database
     public int $affectedRows = 0;
     public int $insertId = 0;
 
+    public DatabaseQuery $query;
+
+    
+
     /**
      * Inicializa la clase de conexión la base de datos mysqli 
      */
@@ -32,6 +37,8 @@ class Database
         $this->connectionData['username'] = $username ? $username : NV_API_DB_USERNAME;
         $this->connectionData['password'] = $password ? $password : NV_API_DB_PASSWORD;
         $this->connectionData['database'] = $database ? $database : NV_API_DB_DATABASE;
+        
+        $this->query = new DatabaseQuery($this);
     }
 
     /**

@@ -15,9 +15,9 @@ class Routes
          * Ejm. "test/:int" 
          * @param string $name_space_controller El namaspace del controlador Utilice el Controlador::class
          */
-        public static function add(string $route, string $name_space_controller):void
+        public static function add(string $route, string $name_space_controller, string $custom_method = ''):void
         {
-            self::$routes[] = new Route($route, $name_space_controller);
+            self::$routes[] = new Route($route, $name_space_controller, $custom_method);
         }
 
 

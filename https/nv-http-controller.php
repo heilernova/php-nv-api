@@ -19,19 +19,30 @@ class nvHttpController
         $this->body = json_decode(file_get_contents('php://input'));
 
         // validamos is exitem el model
-        $controller = str_replace('Controller', 'Model', $this::class);
-        //response($controller);
-        $this->model =  new $controller();
+        $model = str_replace('Controller', 'Model', $this::class);
+        
+        try {
+            //response($controller);
+            $this->model =  new $model();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
     }
+
+
+
 
     /**
      * Ejectua el método http solicitado por el cliente.
      * @param array $params Parmaetros ingresados en la url
      */
-    public function execute(?array $params):void
+    public function execute(?array $params, string $custom_method = ''):void
     {
         // Obtenemos el método de la petición http.
         $method = strtolower($_SERVER['REQUEST_METHOD']);
+
+        $method .= ucfirst($custom_method);
 
         // Validamos que el método este soportado por el controlador http
         if (method_exists($this, $method)){
@@ -47,7 +58,11 @@ class nvHttpController
                 if ($params_number == 0){
                     $this->$method();
                 }else{
-                    $ref->invokeArgs($this, $params);
+                    if ($num_params > 0){
+                        $ref->invokeArgs($this, $params);
+                    }else{
+                        $this->$method();
+                    }
                 }
 
             }else{

@@ -30,7 +30,7 @@ class Api
             if ($route){
 
                 $controller = $route->getController();
-                $controller->execute($route->getParams());
+                $controller->execute($route->getParams(), $route->method);
             }else{
                 response("url undefined", 404);
             }

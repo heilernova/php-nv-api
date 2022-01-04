@@ -19,6 +19,8 @@ require_once 'functions/nv-client-get-ip.php';
 require_once 'functions/nv-client-get-device.php';
 
 require_once 'functions/nv-require-db.php';
+require_once 'functions/nv-token-generate.php';
+
 
 // Bases de datos
 require_once 'database/nv-database-command.php';
@@ -30,8 +32,9 @@ require_once 'database/functions/nv-db-sql-insert.php';
 require_once 'database/functions/nv-db-stmt-sql-insert.php';
 require_once 'database/functions/nv-db-stmt-sql-update.php';
 
+
 // Objetos
 require_once 'classes/nv-date.php';
 
 // Variables de entorno
-$_ENV['NV_CORS_ACCESS-CONTROL-ALLOW-ORIGIN'] = '*';
+date_default_timezone_set("UTC");

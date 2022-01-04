@@ -23,6 +23,8 @@ class Route{
     /** Almacena la url de la peticion http del cliente */
     public string $httpRequest = '';
 
+    public string $method = '';
+
 
 
 
@@ -31,6 +33,7 @@ class Route{
         public string $url = '',
         /** Controlador asociado a la ruta */
         public string $nameSpaceController = '',
+        string $custom_method = ''
     )
     {
 
@@ -65,6 +68,8 @@ class Route{
 
         $this->indexParams = $result[0];
         $this->indexControllers = $result[1];
+
+        $this->method = $custom_method;
     }
 
 
