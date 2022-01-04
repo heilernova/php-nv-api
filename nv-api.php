@@ -8,6 +8,7 @@ class Api
 {
 
     public Cors $cors;
+    private static string $fileIdentifiquer = '';
 
     public function __construct()
     {
@@ -50,6 +51,8 @@ class Api
 
             $settings = json_decode(file_get_contents($path));
 
+            define('NV_API_FILE_IDENTIFIQUER', self::$fileIdentifiquer);
+
             define('NV_API_DB_HOSTNAME', $settings->connectionData->hostname ?? '');
             define('NV_API_DB_USERNAME', $settings->connectionData->username ?? '');
             define('NV_API_DB_PASSWORD', $settings->connectionData->password ?? '');
@@ -70,5 +73,15 @@ class Api
 
         }
 
+    }
+
+    /**
+     * Establece el idenficar de los files, esta opcion se recomentiado cuando se tiene varias api
+     * en un solo file.
+     * @param string $name Texto por el cual iniciario los texto
+     */
+    public function fileIdentifiquer(string $name)
+    {
+        self::$fileIdentifiquer = $name;
     }
 }

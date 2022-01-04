@@ -121,6 +121,10 @@ class Route{
             });
             
             $controller_dir = str_replace('-controller', '', $controller_file);
+            
+            $controller_file = NV_API_FILE_IDENTIFIQUER . $controller_file;
+
+        
 
             $file = NV_API_PATH_HTTPS .  "$controller_dir/$controller_file" . '.php';
     
