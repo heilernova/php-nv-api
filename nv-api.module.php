@@ -7,6 +7,7 @@ require_once 'https/nv-body-response.php';
 require_once 'https/nv-response.php';
 require_once 'https/nv-http-controller.php';
 require_once 'https/nv-http-model.php';
+require_once 'https/nv-body.php';
 
 require_once 'router/nv-route.php';
 require_once 'router/nv-routes.php';

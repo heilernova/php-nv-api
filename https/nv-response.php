@@ -9,7 +9,7 @@ namespace nv\api;
  */
 function response(mixed $body, int $http_response_code = 200):void
 {
-    echo json_encode($body);
+    if (!is_null($body)) echo json_encode($body);
     http_response_code($http_response_code);
     exit(0);
 }

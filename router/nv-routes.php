@@ -29,29 +29,33 @@ class Routes
         public static function find(string $url):Route|null
         {
 
+            $so = function($a, $b) { return (strcmp ($b->url, $a->url));    };
+
+            uasort(self::$routes, $so);
+
+
             // Limpiamos la url quitando los "/" de los extemos del string $url
             $url = trim($url, '/');
 
             // Separamamos la url
-            $array = explode('/', trim($url,  '/'));
+            $url_array = explode('/', trim($url,  '/'));
 
             // Contamos el número de items del array
-            $num = count($array);
+            $num = count($url_array);
 
             // Filatramos la rutas que concuerdan con la url de la petición http
-            $filter_urls = array_filter(self::$routes, function(Route $route) use ($num, $array, $url){
+            $filter_urls = array_filter(self::$routes, function(Route $route) use ($num, $url_array, $url){
 
                 if ($route->num == $num){
 
                     $valid = true;
 
                     foreach($route->indexControllers as $index_controller){
-                        if ($route->urlArray[$index_controller] != $array[$index_controller]){
+                        if ($route->urlArray[$index_controller] != $url_array[$index_controller]){
                             $valid = false;
                         }else{
                             // Cuadno de encuentre una igualdad de detendra el ciclo
-                            $route->httpRequest == $url;
-                            // $valid = false;
+                            $route->httpRequest = $url;
                         }
                     }
 
@@ -61,6 +65,8 @@ class Routes
                 }
             });
             // response(self::$routes);
+
+            // response([$filter_urls, $url_array, $url]);
 
             return array_shift($filter_urls) ?? null;
         }

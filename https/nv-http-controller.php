@@ -39,6 +39,7 @@ class nvHttpController
      */
     public function execute(?array $params, string $custom_method = ''):void
     {
+        
         // Obtenemos el método de la petición http.
         $method = strtolower($_SERVER['REQUEST_METHOD']);
 

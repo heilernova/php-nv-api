@@ -44,30 +44,15 @@ class Route{
         $this->num = count($this->urlArray);
 
         // Almacensomas los indeces de la parametros de la url.
-        $result = array_reduce($this->urlArray, function($carry, $item){ 
-            
-            static $i = 0;
-            $carry[0] = []; // parametrops
-            $carry[1] = []; // Controladores
-            
-            if (str_starts_with($item,  ':')) 
-            {
-                $carry[0][] = $i; // Paramentros
+        $i = 0;
+        foreach($this->urlArray as $item){
+            if (str_starts_with($item, ':')){
+                $this->indexParams[] = $i;
+            }else{
+                $this->indexControllers[] = $i;
             }
-            else
-            {
-                $carry[1][] = $i; // Controles
-            }
-
             $i++;
-
-            return $carry;
-        });
-
-        // echo json_encode($result); exit;
-
-        $this->indexParams = $result[0];
-        $this->indexControllers = $result[1];
+        }
 
         $this->method = $custom_method;
     }
@@ -84,21 +69,21 @@ class Route{
         // Separamos en un array la url inviado por el cliente
         $array = explode('/', $this->httpRequest);
 
+        
         // recorresmos el array del index de los params
         $params = array_reduce($this->indexParams, function($carry, $item) use ($array){
-
-            var_dump($this->urlArray); exit;
+            
             $type = ltrim($array[$item], ':');
-
+            
             $carry[] = match ($type){
                 'int' => (int)$array[$item],
                 'float' => (float)$array[$item],
                 default => $array[$item]
             };
-
+            
             return $carry;
         });
-
+        // response($params);
         return $params;
 
     }
@@ -137,7 +122,7 @@ class Route{
             require_once $file;
             
             $namespace = $this->nameSpaceController;
-    
+            
             return new $namespace();
     
         }

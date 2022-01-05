@@ -1,6 +1,7 @@
 <?php
 namespace nv\database;
 
+use function nv\api\response;
 
 class DatabaseQuery
 {
@@ -15,9 +16,9 @@ class DatabaseQuery
 
     public function insert($params, $table):bool
     {
-        $sql = nv_db_stmt_sql_insert(array_keys($params), $table);
-
-        return $this->database->execute($sql, $params);
+        $sql = nv_db_stmt_sql_insert(array_keys((array)$params), $table);
+        //response([$params, $sql]);
+        return $this->database->execute($sql, (array)$params);
         
     }
 
@@ -26,8 +27,8 @@ class DatabaseQuery
 
     }
 
-    public function delete()
+    public function delete(string $condition, array $params, string $table):bool
     {
-
+        return $this->database->execute("DELETE FROM $table WHERE $condition", $params);
     }
 }
