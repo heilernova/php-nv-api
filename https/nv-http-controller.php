@@ -11,12 +11,12 @@ use function nv\api\response;
 class nvHttpController
 {
     /** Almacena el contenido del body convertido del formato JSON */
-    protected mixed $body = null;
+    protected mixed|array $body = null;
 
     public function __construct()
     {
         // Obtenemos y almacenamos en la variable $body el contendio del boyd de la peticion http
-        $this->body = json_decode(file_get_contents('php://input'));
+        $this->body = json_decode(file_get_contents('php://input'), true);
 
         // validamos is exitem el model
         $model = str_replace('Controller', 'Model', $this::class);
