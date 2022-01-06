@@ -26,7 +26,10 @@ class Route{
     /** Método personalizado */
     public string $method = '';
 
+    /** Namespace del controlador asignado a la ruta */
     public string $nameSpaceController = '';
+
+    /** Ruta asignada */
     public string $url = '';
 
 

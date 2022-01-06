@@ -14,6 +14,7 @@ class Routes
          * @param string $rute Ruta para definir los parametro utilize ":" seguido del tipo de dato "int, float, string" 
          * Ejm. "test/:int" 
          * @param string $name_space_controller El namaspace del controlador Utilice el Controlador::class
+         * @param string $custom_method Método personalizada a ejecutar.
          */
         public static function add(string $route, string $name_space_controller, string $custom_method = ''):void
         {
@@ -23,7 +24,7 @@ class Routes
 
         /**
          * Buscar en las rutas definidas una que concierde con la petición http que concuerede
-         * @param string $url URL de la petición http realizada por el usuario.
+         * @param string $url URL de la petición http realizada por el cliente.
          * @return Route|null retorna null en caso de que la ruta no este definida.
          */
         public static function find(string $url):Route|null

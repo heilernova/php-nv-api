@@ -132,13 +132,13 @@ class Database
 
     /**
      * Ejecuta una instrución sql preparada en la base de datos
-     * @param array $commnad El primero item es el sql y el segundo son los parametros.
+     * @param array $commnad El primero item es el sql y el segundo son los valores.
      * @return DatabaseResult
      */
     public function executeCommand(array $command):DatabaseResult
     {
-        $result = $this->execute($command['sql'] ?? $command[0], $command['params'] ?? ( $command[1] ?? null));
-        return new DatabaseResult($result, $this->insertId, $this->affectedRows);
+        $result = $this->execute($command['sql'] ?? $command[0], $command['values'] ?? ( $command[1] ?? null));
+        return new DatabaseResult($result, $this->insertId, $this->affectedRows, $command['sql'] );
     }
 
 

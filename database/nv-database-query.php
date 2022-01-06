@@ -29,7 +29,7 @@ class DatabaseQuery
     public function insert(array $params, string $table):bool
     {
         $sql = nv_db_stmt_sql_insert(array_keys((array)$params), $table);
-        //response([$params, $sql]);
+
         return $this->database->execute($sql, (array)$params);
     }
 

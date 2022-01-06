@@ -18,6 +18,9 @@ class Cors
     }
 
 
+    /**
+     * Carga los CORS en la enjecución.
+     */
     public static function load():void
     {
         $content_type = self::$contentType;

@@ -1,6 +1,6 @@
 # php-nv-api
 
-# Requerimientos del sistema
->>> * PHP Version: 8.0
+## Requerimientos del sistema
+* PHP Version: 8.0
 
-# Intalación
+## Intalación

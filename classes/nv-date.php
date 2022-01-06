@@ -24,15 +24,15 @@ class NvDate
     public static function getDiffString(string $star, string $end = 'now'):string
     {
         $dff = self::getDiff($star, $end);
-        $d = '';
-
-        $d .= $dff->y > 0 ?  ( $dff->y == 1 ? $dff->y . " año"  : $dff->y . ' años' ) : '';
-        $d .=  ($dff->m > 0 ?  ', '.( $dff->m == 1 ? $dff->m . " mes"  : $dff->m . ' meses' ) : '');
-        $d .=  ($dff->d > 0 ?  ', '.( $dff->d == 1 ? $dff->d . " dia"  : $dff->d . ' dias' ) : '');
         
-        $d = ltrim($d, ', ');
+        $result_string = '';
+        $result_string .= $dff->y > 0 ?  ( $dff->y == 1 ? $dff->y . " año"  : $dff->y . ' años' ) : '';
+        $result_string .=  ($dff->m > 0 ?  ', '.( $dff->m == 1 ? $dff->m . " mes"  : $dff->m . ' meses' ) : '');
+        $result_string .=  ($dff->d > 0 ?  ', '.( $dff->d == 1 ? $dff->d . " dia"  : $dff->d . ' dias' ) : '');
         
-        return $d;
+        $result_string = ltrim($result_string, ', ');
+        
+        return $result_string;
     }
 
 

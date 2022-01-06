@@ -2,6 +2,7 @@
 namespace nv\api;
 
 /**
+ * Clase main para ejecutar la api
  * @author Heiler Nova
  */
 class Api
@@ -45,6 +46,8 @@ class Api
 
     /**
      * Cargamos las configuraciones de entorno del sistema.
+     * @param string $path Ruta del archivo JSON donde se encuentran las configuraciónes del sistema
+     * @return void
      */
     public function loadSettings(string $path):void
     {
@@ -77,9 +80,10 @@ class Api
     }
 
     /**
-     * Establece el idenficar de los files, esta opcion se recomentiado cuando se tiene varias api
-     * en un solo file.
-     * @param string $name Texto por el cual iniciario los texto
+     * Establece el idenficar de los ficheros, esta opcion se recomentiado cuando se tiene varias api en el mismo
+     * proyecto con el fin de mejorar el orden.
+     * @param string $name Texto por el cual iniciario los texto ejm. text: 'core-', file name: core-test.controller.php
+     * @return void
      */
     public function fileIdentifiquer(string $name)
     {
