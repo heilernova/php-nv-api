@@ -43,7 +43,7 @@ class DatabaseQuery
      */
     public function update(array $params, array $condition, $table):bool
     {
-        $sql = nv_db_stmt_sql_update($params, $condition[0], $table);
+        $sql = nv_db_stmt_sql_update(array_keys($params), $condition[0], $table);
         $sql_params = array_merge($params, $condition[1] ?? []);
 
         return $this->database->execute($sql,$sql_params);
