@@ -17,7 +17,6 @@ class DatabaseQuery
     public function __construct(Database $database)
     {
         $this->database = $database;
-       
     }
 
     /**

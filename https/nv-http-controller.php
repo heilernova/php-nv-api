@@ -11,7 +11,7 @@ use function nv\api\response;
 class nvHttpController
 {
     /** Almacena el contenido del body convertido del formato JSON */
-    protected mixed $body = null;
+    protected array|int|float|string|bool|null $body = null;
 
     public function __construct()
     {
