@@ -51,22 +51,24 @@ class Routes
                     $valid = true;
 
                     foreach($route->indexControllers as $index_controller){
+
                         if ($route->urlArray[$index_controller] != $url_array[$index_controller]){
                             $valid = false;
                         }else{
                             // Cuadno de encuentre una igualdad de detendra el ciclo
                             $route->httpRequest = $url;
                         }
+
                     }
 
                     return $valid;
+
                 }else{
+
                     return false;
+
                 }
             });
-            // response(self::$routes);
-
-            // response([$filter_urls, $url_array, $url]);
 
             return array_shift($filter_urls) ?? null;
         }

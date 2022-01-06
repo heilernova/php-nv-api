@@ -3,6 +3,7 @@ namespace nv;
 
 /**
  * Genera un token
+ * @author Heiler Nova
  * @param int $long Número de carateres que poseera el token, por default es 50
  */
 function nv_token_generate(int $long = 50)

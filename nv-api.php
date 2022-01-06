@@ -18,6 +18,7 @@ class Api
     /**
      * Inicia la aplicación mediante al url enviada por el cliente.
      * @param string $url Url corresponiente a la petición http.
+     * @param bool $cors
      */
     public function run(string $url, bool $cors = false):void
     {

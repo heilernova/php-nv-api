@@ -23,18 +23,16 @@ class Route{
     /** Almacena la url de la peticion http del cliente */
     public string $httpRequest = '';
 
+    /** Método personalizado */
     public string $method = '';
 
+    public string $nameSpaceController = '';
+    public string $url = '';
 
 
 
     /** Inicaliza la clase y carga lo valores con los parametro ingresados. */
-    function __construct(
-        public string $url = '',
-        /** Controlador asociado a la ruta */
-        public string $nameSpaceController = '',
-        string $custom_method = ''
-    )
+    function __construct(string $url = '', string $name_space_controller = '', string $custom_method = '')
     {
 
         // Separamos la url un array con los valor ingresados.
@@ -54,6 +52,8 @@ class Route{
             $i++;
         }
 
+        $this->url = $url;
+        $this->nameSpaceController = $name_space_controller;
         $this->method = $custom_method;
     }
 
@@ -69,7 +69,6 @@ class Route{
         // Separamos en un array la url inviado por el cliente
         $array = explode('/', $this->httpRequest);
 
-        
         // recorresmos el array del index de los params
         $params = array_reduce($this->indexParams, function($carry, $item) use ($array){
             
@@ -83,7 +82,7 @@ class Route{
             
             return $carry;
         });
-        // response($params);
+
         return $params;
 
     }
@@ -113,8 +112,6 @@ class Route{
             $controller_dir = str_replace('-controller', '', $controller_file);
             
             $controller_file = NV_API_FILE_IDENTIFIQUER . $controller_file;
-
-        
 
             $file = NV_API_PATH_HTTPS .  "$controller_dir/$controller_file" . '.php';
     
