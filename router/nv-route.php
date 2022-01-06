@@ -61,15 +61,15 @@ class Route{
 
 
     /**
-     * Obtene los parametros de la url
-     * @return array|null retorna un array de los parametros de la url, en caso de no tener parametros retrona nunlo.
+     * Get the url parameters
+     * @return array|null returns an array of the url parameters, in case of not having parameters, it will return null.
      */
     public function getParams():?array
     {
-        // Separamos en un array la url inviado por el cliente
+        // We convert the url of the request into on array
         $array = explode('/', $this->httpRequest);
 
-        // recorresmos el array del index de los params
+        // We go through the elements of the array
         $params = array_reduce($this->indexParams, function($carry, $item) use ($array){
             
             $type = ltrim($array[$item], ':');
@@ -92,7 +92,7 @@ class Route{
 
 
     /**
-     * Obtiene el controlador asociado a la url
+     * Gets
      * @return nvHttpController
      * @throws void En caso de error Detiene la ejecución, y registra los errores mediante el llamado de nv_error_log
      */
