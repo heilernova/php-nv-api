@@ -38,26 +38,40 @@ class Route{
     function __construct(string $url = '', string $name_space_controller = '', string $custom_method = '')
     {
 
-        // Separamos la url un array con los valor ingresados.
-        $this->urlArray = explode('/', $url);
+        try {
 
-        // Almacenamos el número de elementos de un array crado apartir de la url designada para la ruta.
-        $this->num = count($this->urlArray);
+            // Separamos la url un array con los valor ingresados.
+            $this->urlArray = explode('/', $url);
 
-        // Almacensomas los indeces de la parametros de la url.
-        $i = 0;
-        foreach($this->urlArray as $item){
-            if (str_starts_with($item, ':')){
-                $this->indexParams[] = $i;
-            }else{
-                $this->indexControllers[] = $i;
+            // Almacenamos el número de elementos de un array crado apartir de la url designada para la ruta.
+            $this->num = count($this->urlArray);
+
+            // Almacensomas los indeces de la parametros de la url.
+            $i = 0;
+            foreach($this->urlArray as $item){
+                if (str_starts_with($item, ':')){
+                    $this->indexParams[] = $i;
+                }else{
+                    $this->indexControllers[] = $i;
+                }
+                $i++;
             }
-            $i++;
+
+            $this->url = $url;
+            $this->nameSpaceController = $name_space_controller;
+            $this->method = $custom_method;
+
+        } catch (\Throwable $th) {
+            
+            $message = [
+                'Error con el contructor del  Route',
+                $th
+            ];
+
+            nv_api_error_log($message);
+
         }
 
-        $this->url = $url;
-        $this->nameSpaceController = $name_space_controller;
-        $this->method = $custom_method;
     }
 
 
@@ -69,24 +83,39 @@ class Route{
      */
     public function getParams():?array
     {
-        // We convert the url of the request into on array
-        $array = explode('/', $this->httpRequest);
+        try {
+            
+            // We convert the url of the request into on array
+            $array = explode('/', $this->httpRequest);
 
-        // We go through the elements of the array
-        $params = array_reduce($this->indexParams, function($carry, $item) use ($array){
-            
-            $type = ltrim($array[$item], ':');
-            
-            $carry[] = match ($type){
-                'int' => (int)$array[$item],
-                'float' => (float)$array[$item],
-                default => $array[$item]
-            };
-            
-            return $carry;
-        });
+            // We go through the elements of the array
+            $params = array_reduce($this->indexParams, function($carry, $item) use ($array){
+                
+                $type = ltrim($array[$item], ':');
+                
+                $carry[] = match ($type){
+                    'int' => (int)$array[$item],
+                    'float' => (float)$array[$item],
+                    default => $array[$item]
+                };
+                
+                return $carry;
+            });
 
-        return $params;
+            return $params;
+
+
+        } catch (\Throwable $th) {
+
+            $message = [
+                'Error al ejecuta getParams() de la clase Route',
+                $th
+            ];
+
+            nv_api_error_log($message);
+        }
+
+
 
     }
 

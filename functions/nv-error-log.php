@@ -39,7 +39,20 @@ function nv_api_error_log(array $error_messages, int $http_response_code = 500, 
         if (is_array($item)){
 
             foreach($item as $sub_item){
-                fputs($file, "\t- $sub_item\n");
+
+                if (is_array($sub_item)){
+                    
+                    foreach ($sub_item as $sub_sub_item){
+
+                        fputs($file, "\t\t- $sub_item\n");
+
+                    }
+
+                }else{
+
+                    fputs($file, "\t- $sub_item\n");
+
+                }
             }
 
         }else{

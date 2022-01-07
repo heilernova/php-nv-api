@@ -67,7 +67,7 @@ class Database
                     "\tUsuario:         $username",
                     "\tPassword:        $password",
                     "\tBase de datos    $database",
-                    "Mensaje de errror",
+                    "\nMensaje de errror:",
                     mysqli_connect_error()
                 ];
 
