@@ -8,6 +8,7 @@ use function nv\api\nv_api_error_log;
 
 require_once 'nv-database-query.php';
 
+
 /**
  * En esta clase el auto commit esta desactivado.
  * Para afectuar los cambios en la base de datos de debe llamar el método commit() de la clase.
@@ -29,7 +30,6 @@ class Database
 
     public DatabaseQuery $query;
 
-    
 
     /**
      * Inicializa la clase de conexión la base de datos mysqli
@@ -47,6 +47,7 @@ class Database
         
         $this->query = new DatabaseQuery($this);
     }
+
 
     /**
      * Abre una conexión en la base de datos en coso de que no este iniciada.
