@@ -10,6 +10,7 @@ require_once 'nv-database-query.php';
 
 /**
  * En esta clase el auto commit esta desactivado.
+ * Para afectuar los cambios en la base de datos de debe llamar el método commit() de la clase.
  * @author Heiler Nova.
  */
 class Database
@@ -31,7 +32,11 @@ class Database
     
 
     /**
-     * Inicializa la clase de conexión la base de datos mysqli 
+     * Inicializa la clase de conexión la base de datos mysqli
+     * @param string $hostname Nombre del servidor.
+     * @param string $username Nombre de usuario que posee acceso a la base datos.
+     * @param string $password Contraseña de acceso del usuario que poseeo acceso a la base de datos.
+     * @param string $database Nombre de la base de datos.
      */
     public function __construct(string $hostname = null, string $username = null, string $password = null, string $database = null)
     {
@@ -104,6 +109,7 @@ class Database
                     $result = $stmt->get_result();
 
                     return $result ? $result : true;
+
                 }else{
 
                     $this->errors[] = [
@@ -138,13 +144,22 @@ class Database
      */
     public function executeCommand(array $command):DatabaseResult
     {
-        $result = $this->execute($command['sql'] ?? $command[0], $command['values'] ?? ( $command[1] ?? null));
+        $result = $this->execute($command['sql'] ?? $command[0], $command['params'] ?? ( $command[1] ?? null));
+
+        $res = new DatabaseResult();
+        $res->result = $result;
+        $res->affetedRows = $this->affectedRows;
+        $res->insertId = $this->insertId;
+        $res->sql_command = $this->sql_command;
+        $res->sql_params = $this->sql_params;
+
         return new DatabaseResult($result, $this->insertId, $this->affectedRows, $command['sql'] );
     }
 
 
     /**
      * Confirma y carga los cambios en la base de datos.
+     * @return bool true on success or false on failure.
      */
     public function commit():bool
     {
