@@ -18,7 +18,7 @@ class nvHttpController
         // Obtenemos y almacenamos en la variable $body el contendio del boyd de la peticion http
         $this->body = json_decode(file_get_contents('php://input'), true);
 
-        // validamos is exitem el model
+        // validamos si existe el modelo
         $model = str_replace('Controller', 'Model', $this::class);
         
         try {

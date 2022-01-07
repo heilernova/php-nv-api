@@ -23,6 +23,8 @@ class Database
 
     public int $affectedRows = 0;
     public int $insertId = 0;
+    public string $sql_command = '';
+    public array $sql_params = [];
 
     public DatabaseQuery $query;
 
@@ -94,11 +96,10 @@ class Database
 
                 if ($stmt->execute()){
 
-                    // Guardamos el número de filas afectadas de la cosulta sql
                     $this->affectedRows = $stmt->affected_rows;
-
-                    // Guardamos el id generado de la consulta sql.
                     $this->insertId = $stmt->insert_id;
+                    $this->sql_command = $sql;
+                    $this->sql_params = $params;
 
                     $result = $stmt->get_result();
 
@@ -123,7 +124,7 @@ class Database
 
         } catch (\Throwable $th) {
             nv_api_error_log(
-                ['Error al ejecutar en commando sql en la base de datos', $th]
+                ['Error con la ejecución del metodo Database::execute', $th]
             );
         }
         return false;

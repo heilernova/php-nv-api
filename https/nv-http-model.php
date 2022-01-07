@@ -8,9 +8,10 @@ use function nv\api\nv_client_get_ip;
 
 class nvHttpModel
 {
-    public Database $db;
-    public string $clientIp = '';
-    public int $clientDevice = 0;
+
+    private Database $db;
+    private string $clientIp = '';
+    private int $clientDevice = 0;
 
     public function __construct()
     {

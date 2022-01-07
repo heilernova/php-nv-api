@@ -1,5 +1,6 @@
 <?php
 
 use nv\api\Routes;
+use test\https\PruebasController;
 
-Routes::add('pruebas', Pruebas::class);
+Routes::add('pruebas', PruebasController::class);

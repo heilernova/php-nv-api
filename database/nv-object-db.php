@@ -12,7 +12,8 @@ class nvObjectDb
     public function __construct(array $data)
     {
         
-        $keys_undefined = [];
+        $keys_undefined = []; // Parametros indefinidos
+        $keys_invalid = []; // Parametros cuyo datos no coinciden con su tipo
 
         foreach($this as $key=>$value){
             if (array_key_exists($key, $data)){
@@ -20,12 +21,7 @@ class nvObjectDb
                 try {
                     $this->$key = $data[$key];
                 } catch (\Throwable $th) {
-                    nv_api_error_log([
-                        'Error al cargar el valor en la clase',
-                        "Key = $key",
-                        "Tipo de datos del parametro del objeto: $this->$key tipo de dato : " . gettype($this->$key),
-                        "Tipo de datos de la db: $data[$key] tipo de dato :" . gettype($data[$key])
-                    ]);
+                    $keys_invalid[] = "$key : " . gettype($this->$key) . " <> " . gettype($data[$key]);
                 }
 
             }else{
@@ -33,10 +29,13 @@ class nvObjectDb
             }
         }
 
-        if ($keys_undefined){
+        if ($keys_undefined || $keys_invalid){
             nv_api_error_log([
-                'Falta parametros:',
-                ...$keys_undefined
+                'Error al cargar la clase DB',
+                'Parametros faltantes:',
+                $keys_undefined,
+                'Parametros invalidos',
+                $keys_invalid
             ]);
         }
     }

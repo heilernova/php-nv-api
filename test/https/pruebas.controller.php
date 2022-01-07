@@ -1,12 +1,13 @@
 <?php
+namespace test\https;
 
 use nv\api\https\nvHttpController;
 
 use function nv\api\response;
 
-class Pruebas extends nvHttpController
+class PruebasController extends nvHttpController
 {
     function get(){
-        response("Hola mundo");
+        response('ok');
     }
 }

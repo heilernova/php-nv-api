@@ -113,12 +113,13 @@ class Route{
             });
             
             $controller_dir = str_replace('-controller', '', $controller_file);
+            $controller_file = str_replace('-controller', '.controller', NV_API_FILE_IDENTIFIQUER . $controller_file);
             
-            $controller_file = NV_API_FILE_IDENTIFIQUER . $controller_file;
+            $file = NV_API_PATH_HTTPS .  "$controller_file" . '.php';
 
-            $file = NV_API_PATH_HTTPS .  "$controller_dir/$controller_file" . '.php';
-    
-            $file = str_replace('-controller', '.controller', $file);
+            
+            if (!file_exists($file)) $file = NV_API_PATH_HTTPS .  "$controller_dir/$controller_file" . '.php';
+            
             require_once $file;
             
             $namespace = $this->nameSpaceController;

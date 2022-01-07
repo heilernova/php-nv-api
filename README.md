@@ -5,9 +5,10 @@
 
 ## Intalación
 
-Duede realizar la descarga manualmente desde el repositorio de gihub, o descargarlos mediante consola.
+Duede realizar la descarga manualmente desde el repositorio de gihub, o descargarlos mediante consola,
+en el proyecto
 
 El código por cosnola
 ```git
-git close https://github.com/heilernova/php-nv-api;
+git clone https://github.com/heilernova/php-nv-api;
 ```
