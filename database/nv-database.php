@@ -26,7 +26,7 @@ class Database
     public int $affectedRows = 0;
     public int $insertId = 0;
     public string $sql_command = '';
-    public array $sql_params = [];
+    public ?array $sql_params = [];
 
     public DatabaseQuery $query;
 
