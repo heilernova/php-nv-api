@@ -9,10 +9,10 @@ use DateTime;
  */
 class Date
 {
-    public static function getDiff(string $star, string $end = 'now'):DateInterval
+    public static function getDiff(string $date_star, string $date_end = 'now'):DateInterval
     {
-        $date_star = new DateTime($star);
-        $date_end = new DateTime($end);
+        $date_star = new DateTime($date_star);
+        $date_end = new DateTime($date_end);
         return $date_star->diff($date_end);
     }
 
@@ -24,9 +24,9 @@ class Date
      * @return string Retorna un string con la diferencia entre las dos fecha
      * ejm. 1 años, 5 meses, 3 dias
      */
-    public static function getDiffString(string $star, string $end = 'now'):string
+    public static function getDiffString(string $date_star, string $date_end = 'now'):string
     {
-        $dff = self::getDiff($star, $end);
+        $dff = self::getDiff($date_star, $date_end);
         
         $result_string = '';
         $result_string .= $dff->y > 0 ?  ( $dff->y == 1 ? $dff->y . " año"  : $dff->y . ' años' ) : '';
@@ -46,9 +46,9 @@ class Date
      * @return string Retorna un string con la diferencia entre las dos fecha
      * ejm. 1 años, 5 meses, 3 dias, 3 horas, 20 minutos.
      */
-    public static function getDiffFullString(string $star, string $end = 'now'):string
+    public static function getDiffFullString(string $date_star, string $date_end = 'now'):string
     {
-        $dff = self::getDiff($star, $end);
+        $dff = self::getDiff($date_star, $date_end);
 
         $d = '';
     

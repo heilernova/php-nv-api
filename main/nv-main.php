@@ -29,18 +29,29 @@ class Main
         return ltrim($list, ', ');
     }
 
+
+    /**
+     * Estable las cabecerea permitidas al cliente
+     * @param string|array $headers 
+     */
     public function setHeaders(string|array $headers):void
     {
         if (is_array($headers)) $headers = $this->listItems($headers);
         $this->headers = $headers;
     }
 
+    /**
+     * Establce los oriqines que tiene acceso a las peticiones HTTP
+     */
     public function setOrigin(string|array $origin):void
     {
         if (is_array($origin)) $origin = $this->listItems($origin);
         $this->origin = $origin;
     }
 
+    /**
+     * Establce los método que soporta las peticiones HTTP
+     */
     public function setMothods(string|array $methods):void
     {
         if (is_array($methods)) $this->listItems($methods);
@@ -62,6 +73,9 @@ class Main
         $this->routes = $routes;
     }
 
+    /**
+     * Ejecuta la petición HTTP.
+     */
     public function run(string $http_url):void
     {
         header('content-type: application/json');
