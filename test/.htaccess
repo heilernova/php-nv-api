@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^(.*) test.index.php?url=$1 [L,QSA]
