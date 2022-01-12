@@ -31,3 +31,20 @@ Un directorio llamada https, el cual contendra los controladores.
 RewriteEngine On
 RewriteRule ^(.*) test.index.php?url=$1 [L,QSA]
 ```
+#### api.json
+```json
+{
+    "paths":{
+        "errors":"errors/",
+        "https":"https/"
+    },
+    "database":{
+        "default":{
+            "hostname":"localhost",
+            "username":"root",
+            "password":"",
+            "database":"ftc_registro_tirillas_post"
+        }
+    }
+}
+```
