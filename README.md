@@ -3,7 +3,7 @@
 ## Requerimientos del sistema
 * PHP Version: 8.0
 
-## Intalación
+## Instalación
 
 Duede realizar la descarga manualmente desde el repositorio de gihub, o descargarlos mediante consola,
 en el proyecto
