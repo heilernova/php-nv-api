@@ -79,3 +79,38 @@ $main->setRoutes(Routes::getRoutes());
 
 $main->run($_GET['url']);
 ```
+
+
+## Cración de los controladores
+Dentro del directorio https se alojaron los controladores
+Para nombrara se debe dar el nombre mas .controller.php
+
+Ejemplos
+* Controlador TestController : Nombre del fichero => test.controller.php
+* Controlador UserAddressControler : Nombre del fichero => user-address.controller.php
+
+### Contendio del fichero
+```php
+namespace test;
+
+use nv\api\HttpController;
+
+use function nv\api\response;
+
+class TestController extends HttpController
+{
+
+    function get(){
+        $result = $this->database->execute("SELECT * FROM tb_business")->fetch_all(MYSQLI_ASSOC);
+        response($result);
+    }
+
+    function post(int $name, $id = null){
+        response($name);
+    }
+    
+    function delete(int $id){
+        response('ok');
+    }
+}
+```
