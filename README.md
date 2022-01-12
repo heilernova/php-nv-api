@@ -90,6 +90,9 @@ Ejemplos
 * Controlador UserAddressControler : Nombre del fichero => user-address.controller.php
 
 ### Contendio del fichero
+
+las funciones internas hacen referencia a los metodos que soporta el controlador asociada la ruta.
+En caso no tener el un metod que solicita el cliente retornara error 405 Método no soportado por la url.
 ```php
 namespace test;
 
