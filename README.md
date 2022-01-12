@@ -43,7 +43,7 @@ RewriteRule ^(.*) test.index.php?url=$1 [L,QSA]
             "hostname":"localhost",
             "username":"root",
             "password":"",
-            "database":"ftc_registro_tirillas_post"
+            "database":"database"
         }
     }
 }
