@@ -23,3 +23,11 @@ En la carpeta raíz se deben crear los sigientes elementos
 * api.routes.php
 
 Un directorio llamada https, el cual contendra los controladores.
+
+### Código de los ficheros pirncipales
+
+#### .htaccess
+```htacsess
+RewriteEngine On
+RewriteRule ^(.*) test.index.php?url=$1 [L,QSA]
+```
