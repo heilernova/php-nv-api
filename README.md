@@ -12,3 +12,9 @@ El código por cosnola
 ```git
 git clone https://github.com/heilernova/php-nv-api;
 ```
+
+## Creación del entorno
+En la carpeta raíz se deben crear 3 archivos:
+* api.index.php. 
+* api.json
+* api.routes.php
