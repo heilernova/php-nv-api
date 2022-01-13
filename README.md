@@ -94,7 +94,7 @@ Ejemplos
 las funciones internas hacen referencia a los metodos que soporta el controlador asociada la ruta.
 En caso no tener el un metod que solicita el cliente retornara error 405 Método no soportado por la url.
 
-En este ejemple a url https://www.misito.com/api/test Soporta unicamente los métodos get, post y delete
+En este ejemple a url https://www.misito.com/api/test asociada al controlador TestController, mediantes  "Routes::add('test', TestController::class)", Soporta unicamente los métodos get, post y delete
 ```php
 namespace test;
 
