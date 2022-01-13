@@ -3,6 +3,9 @@ namespace nv\api;
 
 use mysqli_result;
 
+use function nv\database\nv_db_stmt_sql_insert;
+use function nv\database\nv_db_stmt_sql_update;
+
 require_once 'functions/nv-db-sql-insert.php';
 require_once 'functions/nv-db-stmt-sql-insert.php';
 require_once 'functions/nv-db-stmt-sql-update.php';

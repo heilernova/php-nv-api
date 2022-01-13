@@ -37,23 +37,22 @@ class Database
     private function openConnection()
     {
         if (!$this->connection){
-
-            extract($this->connectionData);
-            $connection = mysqli_connect($hostname, $username, $password, $database);
-
-            if (!$connection){
+            try {
+                
+                $data = $this->connectionData;
+                $connection = mysqli_connect($data['hostname'], $data['username'], $data['password'], $data['password']);
+                $this->connection = $connection;
+                $this->connection->autocommit(false);
+                
+            } catch (\Throwable $th) {
                 $messeage = [
                     'Failed to initialize connection to database',
                     'Connection data',
                     $this->connectionData
                 ];
 
-                nv_error_log($messeage);
-            }else{
-                $this->connection = $connection;
-                $this->connection->autocommit(false);
+                nv_error_log($messeage, $th);
             }
-
         }
     }
 
@@ -98,17 +97,17 @@ class Database
                 }
 
             }else{
-                // nv_api_error_log([
-                //     'Error con la preparación de la consulta sql.',
-                //     'SQL: ' . $sql,
-                //     'Mensajse: ' . $this->connection->error
-                // ]);
+                $msg = [
+                    'Error con la preparación de la base de datos.',
+                    'SQL:' . $sql,
+                    'Mensaje de error: ' . $this->connection->error 
+                ];
+
+                nv_error_log($msg);
             }
 
         } catch (\Throwable $th) {
-            // nv_api_error_log(
-            //     ['Error con la ejecución del metodo Database::execute', $th]
-            // );
+            nv_error_log(['Error con la ejecución del metodo Database::execute'], $th);
         }
         return false;
     }
