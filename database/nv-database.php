@@ -39,7 +39,7 @@ class Database
         if (!$this->connection){
 
             extract($this->connectionData);
-            $connection = @mysqli_connect($hostname, $username, $password, $database);
+            $connection = mysqli_connect($hostname, $username, $password, $database);
 
             if (!$connection){
                 $messeage = [
