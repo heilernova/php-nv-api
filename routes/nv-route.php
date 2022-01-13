@@ -162,6 +162,8 @@ class Route
                 }else{
                     response('Method not allowed for URL', 405);
                 }
+            }else{
+                response(['not controller'], 500);
             }
         }else{
             $c = $this->callable;
