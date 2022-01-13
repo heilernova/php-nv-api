@@ -81,7 +81,7 @@ $main->run($_GET['url']);
 ```
 
 
-## Cración de los controladores
+## Creación de los controladores
 Dentro del directorio https se alojaron los controladores
 Para nombrara se debe dar el nombre mas .controller.php
 
