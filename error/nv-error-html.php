@@ -64,9 +64,57 @@
                 <?php } ?>
             </div>
 
-            <h4>Error</h4>
+            <h4>Captura del error del sistema</h4>
             <div>
-                <?php echo $item['throwable'] ?>
+                <div>
+                    <span><strong> Código: </strong></span>
+                    <span><?php echo $item['throwable']['code'] ?></span>
+                </div>
+                
+                <div>
+                    <span><strong>Archibo:</strong> </span>
+                    <span><?php echo $item['throwable']['file'] ?></span>
+                </div>
+                <div>
+                    <span><strong>Linea:</strong> </span>
+                    <span><?php echo $item['throwable']['line'] ?></span>
+                </div>
+                <div>
+                    <div><strong>Rastro</strong></div>
+                    <ul>
+                        <?php foreach ($item['throwable']['trace'] as $trace){ ?>
+                            
+                            <li>
+                                
+                                <?php foreach ($trace as $trace_key => $trace_value){ ?>
+
+                                   <div>
+                                        <span> <?php echo $trace_key . " : " ?> </span>
+                                        <span>
+                                       
+                                            <?php if (is_array($trace_value)){ ?>
+                                                <ol>                
+                                                    <?php foreach($trace_value as $key=>$value){ ?> 
+                                       
+                                                       <li>
+                                                            <span> <?php echo $key ?> = </span>
+                                                            <span> <?php echo is_array($value) ? json_encode($value) : $value ?> </span>
+                                                       </li>
+                                                    <?php } ?>
+                                                </ol>
+                                            <?php }else { echo $trace_value; } ?>
+                                       
+                                        </span>
+                                   </div>
+
+                                <?php } ?>
+
+                            </li>
+
+                        <?php } ?>
+                    </ul>
+                </div>
+                
             </div>
             <br>
             <button>Eliminar</button>

@@ -36,11 +36,12 @@ class Database
 
     private function openConnection()
     {
+       
         if (!$this->connection){
             try {
                 
                 $data = $this->connectionData;
-                $connection = mysqli_connect($data['hostname'], $data['username'], $data['password'], $data['password']);
+                $connection = mysqli_connect($data['hostname'], $data['username'], $data['password'], $data['database']);
                 $this->connection = $connection;
                 $this->connection->autocommit(false);
                 
@@ -50,9 +51,10 @@ class Database
                     'Connection data',
                     $this->connectionData
                 ];
-
                 nv_error_log($messeage, $th);
             }
+        }else{
+            echo "S"; exit;
         }
     }
 

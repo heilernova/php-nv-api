@@ -51,4 +51,9 @@ class ErrorController
         }
 
     }
+
+
+    static function get(){
+        
+    }
 }

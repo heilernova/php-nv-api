@@ -3,6 +3,7 @@
         "errors":"errors/",
         "https":"https/"
     },
+    "path-conf":".../",
     "database":{
         "default":{
             "hostname":"localhost",

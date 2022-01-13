@@ -1,6 +1,9 @@
 <?php
 namespace nv\api;
 
+require_once 'nv-http-body.php';
+require_once 'nv-http-model.php';
+require_once 'nv-http-response.php';
 /**
  * @author Heiler Nova.
  */

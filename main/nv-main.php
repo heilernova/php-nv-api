@@ -13,11 +13,25 @@ class Main
 
     public function __construct(array $settings, array $routes = null)
     {
+        $_ENV['nv-api-name'] = '';
+
+
+        $_ENV['nv-root']['user'] = 'root';
+        $_ENV['nv-root']['password'] = '2058969';
+
         $_ENV['nv-settings'] = $settings;
+        
         $_ENV['nv-file-identifiquer'] = '';
+
         $_ENV['nv-path-https'] = 'https/';
-        $_ENV['nv-path-errors'] = 'errors/';
-        $_ENV['mv-database-defualt'] = 'default';
+        $_ENV['nv-path-errors'] = $settings['paths']['errors'];
+        
+        $_ENV['nv-database-default'] = 'default';
+
+        $_ENV['nv-databases']['dafault']    = 'default';
+        $_ENV['nv-databases']['list']       = $settings['databases'];
+
+        $_ENV['nv-path-conf'] = $settings['path-config'];
     }
 
     private function listItems(array $items):string
@@ -30,6 +44,10 @@ class Main
         return ltrim($list, ', ');
     }
 
+    public function setApiName(string $name)
+    {
+        $_ENV['nv-api-name'] = $name;
+    }
 
     /**
      * Estable las cabecerea permitidas al cliente

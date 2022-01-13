@@ -20,17 +20,32 @@ function nv_error_log(array $messsage, Throwable $throwable = null, mixed $body 
             'httpUrl'=>$_GET['url'],
             'httpRequestMethod'=>$_SERVER['REQUEST_METHOD']
         ],
-        'messages'=>$messsage,
-        'throwable'=>$throwable
+        'messages'=>$messsage
     ];
 
-    $dir_errors = $_ENV['nv-path-errors'];
+    if ($throwable){
 
-    if (!file_exists($dir_errors)){
-        mkdir($dir_errors);
+        $msg = $throwable->getTrace();
+        $json['throwable'] = [
+            'code'=>$throwable->getCode(),
+            'file'=>$throwable->getFile(),
+            'line'=>$throwable->getLine(),
+            'trace'=>$throwable->getTrace()
+        ];
     }
 
-    $numbers_of_file =  count(glob("$dir_errors/{*.json}", GLOB_BRACE));
+    $dir_errors =  $_ENV['nv-path-errors'];
+    
+    if (!file_exists($dir_errors)){
+        mkdir($dir_errors);
+
+
+
+        
+    }
+    
+    // response($dir_errors);
+    $numbers_of_file =  count(glob("$dir_errors{*.json}", GLOB_BRACE));
     $name_file =  date('Y-m-d', time()) . ' - ' . sprintf("%03d", $numbers_of_file);
 
     $file = fopen("$dir_errors/$name_file.json", 'a+');
@@ -38,6 +53,7 @@ function nv_error_log(array $messsage, Throwable $throwable = null, mixed $body 
     fputs($file, json_encode($json,0));
 
     fclose($file);
-
-    response($json);
+    http_response_code($response_code);
+    echo "Internal server error";
+    exit;
 }

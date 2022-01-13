@@ -76,13 +76,16 @@ class Route
             return $carry;
         });
 
-        $controller_file_name = str_replace('-controller', '.controller', $controller_file_name);
-        $controller_file_name = $_ENV['nv-file-identifiquer'] . $controller_file_name;
+        $controller_file_name_tempo = str_replace('-controller', '.controller', $controller_file_name);
+        $controller_file_name = $_ENV['nv-file-identifiquer'] . $controller_file_name_tempo;
         $controller_dir = '';
         
         $path_file = $_ENV['nv-path-https'] . "$controller_file_name.php";
 
-        if (!file_exists($path_file)) $path_file = $_ENV['nv-path-https'] . "$controller_dir/$controller_file_name.php";
+        if (!file_exists($path_file)){
+            $controller_dir = str_replace('.controller', '', $controller_file_name_tempo);
+            $path_file = $_ENV['nv-path-https'] . "$controller_dir/$controller_file_name.php";
+        }
 
         if (file_exists($path_file)){
 
