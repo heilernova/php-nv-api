@@ -17,6 +17,7 @@ class Main
         $_ENV['nv-file-identifiquer'] = '';
         $_ENV['nv-path-https'] = 'https/';
         $_ENV['nv-path-errors'] = 'errors/';
+        $_ENV['mv-database-defualt'] = 'default';
     }
 
     private function listItems(array $items):string
@@ -56,6 +57,11 @@ class Main
     {
         if (is_array($methods)) $this->listItems($methods);
         $this->methods = $methods;
+    }
+
+    public function setDatabaseDefault(string $datbase_name):void
+    {
+        $_ENV['nv-database-default'] = $datbase_name;
     }
 
     public function setFileIdentifiquer(string $text_identifiquer):void
